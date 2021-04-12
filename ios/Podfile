@@ -12,6 +12,8 @@ target 'Pokedex' do
     :hermes_enabled => false
   )
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'PokedexTests' do
     inherit! :complete
     # Pods for testing
