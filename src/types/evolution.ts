@@ -5,7 +5,7 @@ export type DefaultEvolution = {
   image: string;
 };
 
-export type EvolutionChain = {
+export type Evolution = {
   base_form: {
     name: string;
     image: string;
@@ -14,4 +14,4 @@ export type EvolutionChain = {
   second_evolution: DefaultEvolution;
 };
 
-export default EvolutionChain;
+export default Evolution;

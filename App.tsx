@@ -9,11 +9,21 @@
  */
 import 'react-native-gesture-handler';
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {ThemeProvider} from 'styled-components';
+import {QueryClientProvider} from 'react-query';
+import {queryClient} from './src/services/query-client';
+import theme from './src/styles/theme';
+
 import Routes from './src/routes';
 
 const App = () => {
-  return <Routes />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <Routes />
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
 };
 
 export default App;
