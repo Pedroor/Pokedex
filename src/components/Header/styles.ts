@@ -9,10 +9,16 @@ export const InputContainer = styled.View`
   align-items: center;
 `;
 
+export const HeaderContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+`;
+
 export const Title = styled.Text`
   color: ${props => props.theme.colors.title};
   ${({theme}) => theme.textVariants.title};
-  padding: 15px 0 10px 0;
+  padding: 30px 0 10px 0;
 `;
 
 export const Subtitle = styled.Text`

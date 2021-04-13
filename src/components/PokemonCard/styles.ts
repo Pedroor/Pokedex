@@ -16,10 +16,10 @@ export const CardContainer = styled.View<CardContainerProps>`
   height: 82px;
   width: 98%;
   padding-left: 12px;
-  border-width: 0.5;
+  border-width: 0.5px;
   border-color: ${props => props.theme.colors.lightGrey};
   border-radius: 15px;
-  background-color: ${props => props.color};
+  background-color: ${props => props.theme.colors.grey};
 `;
 
 export const Title = styled.Text`

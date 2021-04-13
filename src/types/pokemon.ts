@@ -1,7 +1,7 @@
 export type ApiResponse = {
   count: number;
   next: string;
-  previous: boolean;
+  previous: string;
   results: PokemonResponse[];
 };
 

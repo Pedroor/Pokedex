@@ -1,11 +1,11 @@
 import React from 'react';
 import {useQuery, QueryFunctionContext} from 'react-query';
 import {ApiResponse, Pokemon} from '../types/pokemon';
-import api from '../services/api';
+import api, {apiPaginate} from '../services/api';
 
 export async function fetchPokemons(ctx: QueryFunctionContext<string[]>) {
-  const [offSet] = ctx.queryKey;
-  const {data} = await api.get<ApiResponse>(`/?limit=20&offSet=${offSet}`);
+  const [endpoint] = ctx.queryKey;
+  const {data} = await apiPaginate.get<ApiResponse>(`${endpoint}?limit=10`);
 
   return data;
 }
@@ -18,8 +18,8 @@ export async function fetchPokemonsById(ctx: QueryFunctionContext<string[]>) {
   return data;
 }
 
-export const usePokemonsQuery = (offSet: string) =>
-  useQuery([offSet], fetchPokemons, {
+export const usePokemonsQuery = (endpoint: string) =>
+  useQuery([endpoint], fetchPokemons, {
     staleTime: 60000 * 60 * 12,
   });
 

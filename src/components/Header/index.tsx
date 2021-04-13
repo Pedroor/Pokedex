@@ -1,5 +1,5 @@
 import React, {ReactNode, useEffect} from 'react';
-
+import {Image, View} from 'react-native';
 import {
   Container,
   Input,
@@ -7,15 +7,18 @@ import {
   Title,
   Subtitle,
   InputContainer,
+  HeaderContainer,
 } from './styles';
 import Search from 'react-native-vector-icons/FontAwesome';
 import Option from 'react-native-vector-icons/Ionicons';
+import Trash from 'react-native-vector-icons/FontAwesome';
+import Pokeball from '../../assets/pokeball.jpg';
 
 interface HeaderProps {
   children?: ReactNode;
   title: string;
   subtitle: string;
-  inputValue: string;
+  inputValue?: string;
   setInputValue: (value: string) => void;
 }
 
@@ -24,12 +27,19 @@ export function Header({
   title,
   subtitle,
   inputValue,
-  setInputValue,
+  setInputValue = () => {},
   ...rest
 }: HeaderProps) {
   return (
     <Container>
-      <Title>{title}</Title>
+      <HeaderContainer>
+        <Title>{title}</Title>
+        <Image
+          style={{width: 68, height: 68, marginBottom: 5}}
+          source={Pokeball}
+        />
+      </HeaderContainer>
+
       <InputContainer>
         <InputArea>
           <Search name="search" size={18} color="#919191" />
@@ -39,6 +49,13 @@ export function Header({
             onChangeText={value => setInputValue(value)}
             placeholder="Busque por um Pokémon..."
             {...rest}
+          />
+          <Trash
+            name="trash-o"
+            onPress={() => setInputValue('')}
+            size={24}
+            color="#f2231f"
+            style={{paddingRight: 10}}
           />
         </InputArea>
         <Option
