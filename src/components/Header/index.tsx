@@ -27,10 +27,6 @@ export function Header({
   setInputValue,
   ...rest
 }: HeaderProps) {
-  useEffect(() => {
-    console.log('OLA');
-  }, []);
-
   return (
     <Container>
       <Title>{title}</Title>
@@ -55,7 +51,7 @@ export function Header({
 
       <Subtitle>
         A Pokédex contem os status detalhados de cada criatura do universo
-        Pokémon.aa
+        Pokémon
       </Subtitle>
     </Container>
   );

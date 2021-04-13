@@ -1,18 +1,26 @@
-import React, {ReactNode, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {Text, View} from 'react-native';
+import {Text, View, FlatList, ListRenderItem} from 'react-native';
+import {usePokemonsQuery} from '../../hooks/usePokemonsQuery';
 import {Header} from '../../components/Header';
+import {PokemonCard} from '../../components/PokemonCard';
+import {PokemonResponse} from '../../types/pokemon';
 
-interface PokedexProps {
-  children: ReactNode;
-}
-
-function Pokedex({children}: PokedexProps) {
+function Pokedex() {
   const [pokemonName, setPokemonName] = useState('');
+  const pokemonQuery = usePokemonsQuery('');
 
-  useEffect(() => {
-    console.log(pokemonName);
-  }, [pokemonName]);
+  useEffect(() => {}, []);
+
+  const renderPokemonCards: ListRenderItem<PokemonResponse> = ({item}) => {
+    const {name, url} = item;
+    const pokemonId = url
+      .replace('https://pokeapi.co/api/v2/pokemon/', '')
+      .replace('/', '');
+    const imageUrl = `https://pokeres.bastionbot.org/images/pokemon/${pokemonId}.png`;
+
+    return <PokemonCard image={imageUrl} pokemonId={pokemonId} name={name} />;
+  };
 
   return (
     <View style={{flex: 1}}>
@@ -22,7 +30,13 @@ function Pokedex({children}: PokedexProps) {
         setInputValue={setPokemonName}
         subtitle="A Pokédex contem os status detalhados de cada criatura do universo Pokémon."
       />
-      <Text>OLA</Text>
+
+      <FlatList
+        data={pokemonQuery.data?.results}
+        renderItem={renderPokemonCards}
+        showsVerticalScrollIndicator={false}
+        style={{marginBottom: 5}}
+      />
     </View>
   );
 }

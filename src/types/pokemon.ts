@@ -1,6 +1,21 @@
-export type Type = {
+export type ApiResponse = {
+  count: number;
+  next: string;
+  previous: boolean;
+  results: PokemonResponse[];
+};
+
+export type PokemonResponse = {
   name: string;
   url: string;
+};
+
+export type Type = {
+  slot: number;
+  type: {
+    name: string;
+    url: string;
+  };
 };
 
 export type Stat = {
