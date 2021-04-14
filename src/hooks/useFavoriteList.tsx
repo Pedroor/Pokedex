@@ -29,7 +29,6 @@ export function FavoriteListProvider({children}: FavoriteListProviderProps) {
 
   useEffect(() => {
     getStore();
-    console.log('LISTA DE FAVORITOS', favoriteList.length);
   }, []);
 
   async function setStore(favoritePokemon: Pokemon[]) {
