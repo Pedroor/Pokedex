@@ -15,14 +15,13 @@ type Icon = {
 
 export const Container = styled.ScrollView`
   flex: 1;
+  margin-top: 15px;
 `;
 
 export const Card = styled.View<CardProps>`
   width: 100%;
   height: 40%;
-
   justify-content: center;
-  align-items: center;
 
   background-color: ${props => props.primaryColor};
 `;
@@ -32,7 +31,15 @@ export const Title = styled.Text`
   ${({theme}) => theme.textVariants.title};
   font-size: 28px;
   text-align: center;
-  padding: 15px 6px 10px 12px;
+  padding: 36px 22px 0 0;
+`;
+
+export const PokedexNumber = styled.Text`
+  color: ${props => props.theme.colors.white};
+  ${({theme}) => theme.textVariants.title};
+  font-size: 22px;
+  text-align: center;
+  padding: 8px 6px 10px 12px;
 `;
 
 export const Icon = styled.View<Icon>`
@@ -98,7 +105,7 @@ export const ProgressBar = styled.View<ProgressBarProps>`
 export const FavoriteListButton = styled.TouchableOpacity<CardProps>`
   height: 48px;
   width: 60%;
-  margin-top: 22px;
+  margin-top: 8px;
   border-width: 0.5;
   border-color: ${props => props.theme.colors.lightGrey};
   border-radius: 24px;
@@ -119,5 +126,5 @@ export const ButtonContainer = styled.View`
 
   justify-content: center;
   align-items: center;
-  margin-top: 22px;
+  margin-top: 8px;
 `;

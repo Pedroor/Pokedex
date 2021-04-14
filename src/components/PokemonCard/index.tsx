@@ -15,65 +15,6 @@ type PokemonCardProps = {
 export function PokemonCard({name, pokemonId, image}: PokemonCardProps) {
   const pokemonQueryById = usePokemonsQueryById(pokemonId);
 
-  function selectContainerColor(color: string) {
-    var containerColor = '';
-    switch (color) {
-      case 'fire':
-        containerColor = theme.pokemonColors.fire;
-        break;
-      case 'water':
-        containerColor = theme.pokemonColors.water;
-        break;
-      case 'normal':
-        containerColor = theme.pokemonColors.normal;
-        break;
-      case 'electric':
-        containerColor = theme.pokemonColors.electric;
-        break;
-      case 'grass':
-        containerColor = theme.pokemonColors.grass;
-        break;
-      case 'ice':
-        containerColor = theme.pokemonColors.ice;
-        break;
-      case 'fighting':
-        containerColor = theme.pokemonColors.fighting;
-        break;
-      case 'poison':
-        containerColor = theme.pokemonColors.poison;
-        break;
-      case 'ground':
-        containerColor = theme.pokemonColors.ground;
-        break;
-      case 'flying':
-        containerColor = theme.pokemonColors.flying;
-        break;
-      case 'psychic':
-        containerColor = theme.pokemonColors.psychic;
-        break;
-      case 'bug':
-        containerColor = theme.pokemonColors.bug;
-        break;
-      case 'rock':
-        containerColor = theme.pokemonColors.rock;
-        break;
-      case 'ghost':
-        containerColor = theme.pokemonColors.ghost;
-        break;
-      case 'dragon':
-        containerColor = theme.pokemonColors.dragon;
-        break;
-      case 'fairy':
-        containerColor = theme.pokemonColors.fairy;
-        break;
-
-      default:
-        containerColor = theme.pokemonColors.normal;
-        break;
-    }
-    return containerColor;
-  }
-
   return (
     <Container>
       <CardContainer color={theme.colors.lightGrey}>

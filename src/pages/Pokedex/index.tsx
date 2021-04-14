@@ -17,6 +17,7 @@ import {useDebounce} from 'use-debounce';
 import {Header} from '../../components/Header';
 import {PokemonCard} from '../../components/PokemonCard';
 import {Loading} from '../../components/Loading';
+import {StatusBar} from '../../components/StatusBar';
 import {PokemonResponse} from '../../types/pokemon';
 import Left from 'react-native-vector-icons/MaterialIcons';
 import Right from 'react-native-vector-icons/MaterialIcons';
@@ -80,66 +81,69 @@ function Pokedex() {
   }
 
   return (
-    <Container>
-      <Header
-        title="Pokédex"
-        inputValue={pokemonName}
-        setInputValue={setPokemonName}
-        subtitle="A Pokédex contem os status detalhados de cada criatura do universo Pokémon."
-      />
-      {pokemonQueryByName.data !== undefined &&
-      pokemonQueryByName.data !== null &&
-      value.length > 1 ? (
-        <PokemonCard
-          image={`https://pokeres.bastionbot.org/images/pokemon/${pokemonQueryByName.data?.id}.png`}
-          pokemonId={
-            pokemonQueryByName.data?.id !== undefined
-              ? pokemonQueryByName.data?.id.toString()
-              : ''
-          }
-          name={pokemonQueryByName.data?.name}
+    <>
+      <StatusBar color="#FFFFFF" />
+      <Container>
+        <Header
+          title="Pokédex"
+          inputValue={pokemonName}
+          setInputValue={setPokemonName}
+          subtitle="A Pokédex contem os status detalhados de cada criatura do universo Pokémon."
         />
-      ) : (
-        <FlatList
-          ref={flalistRef}
-          data={pokemonQuery.data?.results}
-          renderItem={renderPokemonCards}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={item => item.name}
-          ListFooterComponent={() => (
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <TouchableOpacity onPress={() => handleChangePage(false)}>
-                <View style={{flexDirection: 'row'}}>
-                  <PaginateTitle>Anterior</PaginateTitle>
-                  <Left
-                    name="chevron-left"
-                    size={24}
-                    color="#919191"
-                    style={{paddingLeft: 10}}
-                  />
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleChangePage(true)}>
-                <View style={{flexDirection: 'row'}}>
-                  <Right
-                    name="chevron-right"
-                    size={24}
-                    color="#919191"
-                    style={{paddingRight: 10}}
-                  />
-                  <PaginateTitle>Proxíma</PaginateTitle>
-                </View>
-              </TouchableOpacity>
-            </View>
-          )}
-        />
-      )}
-    </Container>
+        {pokemonQueryByName.data !== undefined &&
+        pokemonQueryByName.data !== null &&
+        value.length > 1 ? (
+          <PokemonCard
+            image={`https://pokeres.bastionbot.org/images/pokemon/${pokemonQueryByName.data?.id}.png`}
+            pokemonId={
+              pokemonQueryByName.data?.id !== undefined
+                ? pokemonQueryByName.data?.id.toString()
+                : ''
+            }
+            name={pokemonQueryByName.data?.name}
+          />
+        ) : (
+          <FlatList
+            ref={flalistRef}
+            data={pokemonQuery.data?.results}
+            renderItem={renderPokemonCards}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={item => item.name}
+            ListFooterComponent={() => (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <TouchableOpacity onPress={() => handleChangePage(false)}>
+                  <View style={{flexDirection: 'row'}}>
+                    <PaginateTitle>Anterior</PaginateTitle>
+                    <Left
+                      name="chevron-left"
+                      size={24}
+                      color="#919191"
+                      style={{paddingLeft: 10}}
+                    />
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleChangePage(true)}>
+                  <View style={{flexDirection: 'row'}}>
+                    <Right
+                      name="chevron-right"
+                      size={24}
+                      color="#919191"
+                      style={{paddingRight: 10}}
+                    />
+                    <PaginateTitle>Proxíma</PaginateTitle>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            )}
+          />
+        )}
+      </Container>
+    </>
   );
 }
 
