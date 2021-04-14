@@ -83,7 +83,7 @@ export function FavoriteListProvider({children}: FavoriteListProviderProps) {
                   icon: 'auto',
                   floating: true,
                   duration: 2000,
-                  position: 'top',
+                  position: 'center',
                 }),
                 setStore(favoriteList);
             },
@@ -114,7 +114,7 @@ export function FavoriteListProvider({children}: FavoriteListProviderProps) {
                   icon: 'auto',
                   floating: true,
                   duration: 2000,
-                  position: 'top',
+                  position: 'center',
                 });
               setStore(newFavoriteList);
             },

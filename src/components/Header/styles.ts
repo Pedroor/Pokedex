@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   margin: 20px;
+  margin-top: 15%;
 `;
 
 export const InputContainer = styled.View`

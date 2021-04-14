@@ -15,7 +15,7 @@ type Icon = {
 
 export const Container = styled.ScrollView`
   flex: 1;
-  margin-top: 15px;
+  margin-top: 5%;
 `;
 
 export const Card = styled.View<CardProps>`
