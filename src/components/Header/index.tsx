@@ -1,5 +1,6 @@
 import React, {ReactNode, useEffect} from 'react';
 import {Image, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {
   Container,
   Input,
@@ -13,6 +14,7 @@ import Search from 'react-native-vector-icons/FontAwesome';
 import Option from 'react-native-vector-icons/Ionicons';
 import Trash from 'react-native-vector-icons/FontAwesome';
 import Pokeball from '../../assets/pokeball.jpg';
+import {TouchableOpacity} from 'react-native';
 
 interface HeaderProps {
   children?: ReactNode;
@@ -30,14 +32,18 @@ export function Header({
   setInputValue = () => {},
   ...rest
 }: HeaderProps) {
+  const navigation = useNavigation();
+
   return (
     <Container>
       <HeaderContainer>
         <Title>{title}</Title>
-        <Image
-          style={{width: 68, height: 68, marginBottom: 5}}
-          source={Pokeball}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('FavoriteList')}>
+          <Image
+            style={{width: 68, height: 68, marginBottom: 5}}
+            source={Pokeball}
+          />
+        </TouchableOpacity>
       </HeaderContainer>
 
       <InputContainer>
