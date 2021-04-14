@@ -1,9 +1,11 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {RouteProp, useRoute, useNavigation} from '@react-navigation/native';
 import ArrowBack from 'react-native-vector-icons/Ionicons';
+import {Pokemon} from '../../types/pokemon';
 import {View, Text, Image} from 'react-native';
 import getColorByPokemonType from '../../utils/getPokemonColor';
 import {usePokemonsQueryById} from '../../hooks/usePokemonsQuery';
+import {useFavoriteList} from '../../hooks/useFavoriteList';
 import {StatusBar} from '../../components/StatusBar';
 import {
   Card,
@@ -33,24 +35,35 @@ type ParamList = {
 
 function Details() {
   const navigation = useNavigation();
+  const {handleAddHeroToFavoriteList, isPokemonOnTheList} = useFavoriteList();
   const route = useRoute<RouteProp<ParamList, 'Details'>>();
   const [secondaryType, setSecondaryType] = useState('#FFF');
+  const [pokemon, setPokemon] = useState<Pokemon>({} as Pokemon);
+
   const {id, image} = route.params;
-  const pokemon = usePokemonsQueryById(id);
+  const pokemonResponse = usePokemonsQueryById(id);
   const primaryType = useMemo(
-    () => getColorByPokemonType(pokemon.data?.types[0].type.name || ''),
-    [pokemon.data?.types],
+    () => getColorByPokemonType(pokemonResponse.data?.types[0].type.name || ''),
+    [pokemonResponse.data?.types],
   );
 
+  const myActualPokemonIsOnTheList = isPokemonOnTheList(pokemon.id);
+
   useEffect(() => {
-    if (pokemon.data?.types[1] !== undefined) {
+    if (pokemonResponse.data?.types[1] !== undefined) {
       let secondaryTypeMemo = getColorByPokemonType(
-        pokemon.data?.types[1].type.name || '#FFF',
+        pokemonResponse.data?.types[1].type.name || '#FFF',
       );
 
       setSecondaryType(secondaryTypeMemo);
     }
-  }, [pokemon.data?.types[1]]);
+  }, [pokemonResponse.data?.types[1]]);
+
+  useEffect(() => {
+    if (pokemonResponse.data !== undefined) {
+      setPokemon(pokemonResponse.data);
+    }
+  }, [pokemonResponse.data]);
 
   return (
     <>
@@ -71,14 +84,14 @@ function Details() {
               onPress={() => navigation.goBack()}
             />
 
-            <Title>{pokemon.data?.name}</Title>
+            <Title>{pokemonResponse.data?.name}</Title>
             <View />
           </View>
           <Image
             source={{uri: image}}
             style={{width: 200, height: 200, alignSelf: 'center'}}
           />
-          <PokedexNumber>#{pokemon.data?.id}</PokedexNumber>
+          <PokedexNumber>#{pokemonResponse.data?.id}</PokedexNumber>
         </Card>
         <View
           style={{
@@ -87,11 +100,15 @@ function Details() {
             alignItems: 'center',
           }}>
           <Icon color={primaryType}>
-            <TypeName>{pokemon.data?.types[0].type.name || ''}</TypeName>
+            <TypeName>
+              {pokemonResponse.data?.types[0].type.name || ''}
+            </TypeName>
           </Icon>
-          {pokemon.data?.types[1] !== undefined ? (
+          {pokemonResponse.data?.types[1] !== undefined ? (
             <Icon color={secondaryType}>
-              <TypeName>{pokemon.data?.types[1].type.name || ''}</TypeName>
+              <TypeName>
+                {pokemonResponse.data?.types[1].type.name || ''}
+              </TypeName>
             </Icon>
           ) : (
             <View />
@@ -100,7 +117,7 @@ function Details() {
         <DataContainer>
           <Subtitle primaryColor={primaryType}>Status</Subtitle>
 
-          {pokemon.data?.stats.map((atribute, key) => (
+          {pokemonResponse.data?.stats.map((atribute, key) => (
             <RowContainer key={key}>
               <View
                 style={{
@@ -120,19 +137,39 @@ function Details() {
             </RowContainer>
           ))}
         </DataContainer>
-        <ButtonContainer>
-          <FavoriteListButton primaryColor={primaryType}>
-            <View style={{flexDirection: 'row'}}>
-              <Pokeball
-                name="pokeball"
-                size={22}
-                color="#ece8e8"
-                style={{paddingRight: 16}}
-              />
-              <ButtonText>Adicionar aos favoritos</ButtonText>
-            </View>
-          </FavoriteListButton>
-        </ButtonContainer>
+        {myActualPokemonIsOnTheList ? (
+          <ButtonContainer>
+            <FavoriteListButton
+              primaryColor="#f2231f"
+              onPress={() => handleAddHeroToFavoriteList(pokemon)}>
+              <View style={{flexDirection: 'row'}}>
+                <Pokeball
+                  name="pokeball"
+                  size={22}
+                  color="#ece8e8"
+                  style={{paddingRight: 16}}
+                />
+                <ButtonText>Remover dos favoritos</ButtonText>
+              </View>
+            </FavoriteListButton>
+          </ButtonContainer>
+        ) : (
+          <ButtonContainer>
+            <FavoriteListButton
+              primaryColor={primaryType}
+              onPress={() => handleAddHeroToFavoriteList(pokemon)}>
+              <View style={{flexDirection: 'row'}}>
+                <Pokeball
+                  name="pokeball"
+                  size={22}
+                  color="#ece8e8"
+                  style={{paddingRight: 16}}
+                />
+                <ButtonText>Adicionar aos favoritos</ButtonText>
+              </View>
+            </FavoriteListButton>
+          </ButtonContainer>
+        )}
       </Container>
     </>
   );

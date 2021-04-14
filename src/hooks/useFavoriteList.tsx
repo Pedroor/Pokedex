@@ -1,4 +1,10 @@
-import React, {createContext, useState, ReactNode, useContext} from 'react';
+import React, {
+  createContext,
+  useState,
+  ReactNode,
+  useContext,
+  useEffect,
+} from 'react';
 import {showMessage} from 'react-native-flash-message';
 import AsyncStorage from '@react-native-community/async-storage';
 import {Alert} from 'react-native';
@@ -11,7 +17,7 @@ type FavoriteListProviderProps = {
 type FavoriteListContextData = {
   handleAddHeroToFavoriteList: (pokemon: Pokemon) => void;
   favoriteList: Pokemon[];
-  isPokemonOnTheList: (pokemon: Pokemon) => boolean;
+  isPokemonOnTheList: (id: number) => boolean;
 };
 
 export const FavoriteListContext = createContext<FavoriteListContextData>(
@@ -20,6 +26,11 @@ export const FavoriteListContext = createContext<FavoriteListContextData>(
 
 export function FavoriteListProvider({children}: FavoriteListProviderProps) {
   const [favoriteList, setFavoriteList] = useState<Pokemon[]>([]);
+
+  useEffect(() => {
+    getStore();
+    console.log('LISTA DE FAVORITOS', favoriteList.length);
+  }, []);
 
   async function setStore(favoritePokemon: Pokemon[]) {
     await AsyncStorage.setItem(
@@ -37,9 +48,9 @@ export function FavoriteListProvider({children}: FavoriteListProviderProps) {
     }
   }
 
-  function isPokemonOnTheList(pokemon: Pokemon) {
+  function isPokemonOnTheList(id: number) {
     let existingPokemon = favoriteList.find(
-      pokemonInList => pokemonInList.id === pokemon.id,
+      pokemonInList => pokemonInList.id === id,
     );
     if (!existingPokemon) {
       return false;
@@ -68,7 +79,7 @@ export function FavoriteListProvider({children}: FavoriteListProviderProps) {
               setFavoriteList([...favoriteList, pokemon]),
                 showMessage({
                   message: 'Pokemon adicionado com sucesso!',
-                  description: 'Que tal consultar sua lista?.',
+                  description: 'Que tal consultar sua lista?',
                   type: 'success',
                   icon: 'auto',
                   floating: true,

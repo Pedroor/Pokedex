@@ -7,8 +7,6 @@ import {
   ListRenderItem,
   TouchableOpacity,
 } from 'react-native';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
-import {useNavigation} from '@react-navigation/native';
 import {BASE_URL} from '../../constants/index';
 import {replacePokemonURL} from '../../utils/replaceStrings';
 import {usePokemonsQuery} from '../../hooks/usePokemonsQuery';
@@ -22,11 +20,11 @@ import {PokemonResponse} from '../../types/pokemon';
 import Left from 'react-native-vector-icons/MaterialIcons';
 import Right from 'react-native-vector-icons/MaterialIcons';
 import {Container, PaginateTitle, TitleNotFound} from './styles';
+import {Pokemon} from '../../types/pokemon';
 
 import NotFoundImage from '../../assets/notFound.gif';
 
 function Pokedex() {
-  const navigation = useNavigation();
   const [pokemonName, setPokemonName] = useState('');
   const [value] = useDebounce(pokemonName.toLowerCase(), 500);
   const [endpoint, setEndpoint] = useState(BASE_URL);
@@ -49,14 +47,7 @@ function Pokedex() {
     const {name, url} = item;
     const {pokemonId, imageUrl} = replacePokemonURL(url);
 
-    return (
-      <TouchableWithoutFeedback
-        onPress={() =>
-          navigation.navigate('Details', {id: pokemonId, image: imageUrl})
-        }>
-        <PokemonCard image={imageUrl} pokemonId={pokemonId} name={name} />
-      </TouchableWithoutFeedback>
-    );
+    return <PokemonCard image={imageUrl} pokemonId={pokemonId} name={name} />;
   };
 
   if (pokemonQuery.isLoading) {
