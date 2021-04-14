@@ -1,16 +1,20 @@
 import styled from 'styled-components/native';
 
 type CardProps = {
-  backgroundColor: string;
+  primaryColor: string;
+};
+
+type ProgressBarProps = {
+  primaryColor: string;
+  w: string;
 };
 
 type Icon = {
   color: string;
 };
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
-  align-items: center;
 `;
 
 export const Card = styled.View<CardProps>`
@@ -20,13 +24,13 @@ export const Card = styled.View<CardProps>`
   justify-content: center;
   align-items: center;
 
-  background-color: ${props => props.backgroundColor};
+  background-color: ${props => props.primaryColor};
 `;
 
 export const Title = styled.Text`
   color: ${props => props.theme.colors.white};
   ${({theme}) => theme.textVariants.title};
-  font-size: 30px;
+  font-size: 28px;
   text-align: center;
   padding: 15px 6px 10px 12px;
 `;
@@ -48,4 +52,72 @@ export const TypeName = styled.Text`
   color: ${props => props.theme.colors.white};
   ${({theme}) => theme.textVariants.body1};
   text-align: center;
+`;
+
+export const DataContainer = styled.View`
+  flex: 1;
+  padding-top: 10px;
+`;
+
+export const Subtitle = styled.Text<CardProps>`
+  padding: 12px;
+  color: ${props => props.primaryColor};
+  ${({theme}) => theme.textVariants.body1};
+  font-size: 22px;
+  font-weight: bold;
+`;
+
+export const RowContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Label = styled.Text`
+  padding: 12px;
+  color: ${props => props.theme.colors.grey};
+  ${({theme}) => theme.textVariants.body1};
+`;
+
+export const Content = styled.Text<CardProps>`
+  padding: 12px;
+  ${({theme}) => theme.textVariants.body1};
+  color: ${props => props.primaryColor};
+`;
+
+export const ProgressBar = styled.View<ProgressBarProps>`
+  height: 4px;
+  margin-right: 12px;
+  width: 200px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  border-radius: 4px;
+  background-color: ${props => props.primaryColor};
+`;
+
+export const FavoriteListButton = styled.TouchableOpacity<CardProps>`
+  height: 48px;
+  width: 60%;
+  margin-top: 22px;
+  border-width: 0.5;
+  border-color: ${props => props.theme.colors.lightGrey};
+  border-radius: 24px;
+
+  justify-content: center;
+  align-items: center;
+  background-color: ${props => props.primaryColor};
+`;
+
+export const ButtonText = styled.Text`
+  color: ${props => props.theme.colors.white};
+  ${({theme}) => theme.textVariants.body1};
+  text-align: center;
+`;
+
+export const ButtonContainer = styled.View`
+  flex: 1;
+
+  justify-content: center;
+  align-items: center;
+  margin-top: 22px;
 `;
