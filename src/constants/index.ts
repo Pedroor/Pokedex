@@ -20,3 +20,24 @@ export const POKEMONS_COLORS = {
   steel: '#B7B7CE',
   fairy: '#D685AD',
 };
+
+export const POKEMON_TYPE_ICONS = {
+  normal: '../../assets/icons/normal.png',
+  fire: '../../assets/icons/fire.png',
+  water: '../../assets/icons/water.png',
+  electric: '../../assets/icons/electric.png',
+  grass: '../../assets/icons/grass.png',
+  ice: '../../assets/icons/ice.png',
+  fighting: '../../assets/icons/fighting.png',
+  poison: '../../assets/icons/poison.png',
+  ground: '../../assets/icons/ground.png',
+  flying: '../../assets/icons/flying.png',
+  psychic: '../../assets/icons/psychic.png',
+  bug: '../../assets/icons/bug.png',
+  rock: '../../assets/icons/rock.png',
+  ghost: '../../assets/icons/poison.png',
+  dragon: '../../assets/icons/dragon.png',
+  dark: '../../assets/icons/dark.png',
+  steel: '../../assets/icons/steel.png',
+  fairy: '../../assets/icons/fairy.png',
+};

@@ -50,7 +50,9 @@ function Pokedex() {
 
     return (
       <TouchableWithoutFeedback
-        onPress={() => navigation.navigate('Details', {id: pokemonId})}>
+        onPress={() =>
+          navigation.navigate('Details', {id: pokemonId, image: imageUrl})
+        }>
         <PokemonCard image={imageUrl} pokemonId={pokemonId} name={name} />
       </TouchableWithoutFeedback>
     );
