@@ -9,7 +9,7 @@ export function Loading() {
     <>
       <Header
         title="Pokédex"
-        subtitle="A Pokédex contem os status detalhados de cada criatura do universo Pokémon.@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+        subtitle="A Pokédex contem os status detalhados de cada criatura do universo Pokémon."
         setInputValue={() => {}}
       />
       <Container>

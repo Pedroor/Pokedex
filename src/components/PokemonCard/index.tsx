@@ -1,6 +1,6 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {Image, Text, View, TouchableOpacity} from 'react-native';
+import {Image, View, TouchableOpacity} from 'react-native';
 import {usePokemonsQueryById} from '../../hooks/usePokemonsQuery';
 import {Container, CardContainer, Title, PokedexNumber} from './styles';
 import {useFavoriteList} from '../../hooks/useFavoriteList';

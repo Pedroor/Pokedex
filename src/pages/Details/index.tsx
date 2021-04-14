@@ -2,7 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {RouteProp, useRoute, useNavigation} from '@react-navigation/native';
 import ArrowBack from 'react-native-vector-icons/Ionicons';
 import {Pokemon} from '../../types/pokemon';
-import {View, Text, Image} from 'react-native';
+import {View, Image} from 'react-native';
 import getColorByPokemonType from '../../utils/getPokemonColor';
 import {usePokemonsQueryById} from '../../hooks/usePokemonsQuery';
 import {useFavoriteList} from '../../hooks/useFavoriteList';

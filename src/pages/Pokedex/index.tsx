@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef} from 'react';
 
 import {
   Image,
@@ -20,7 +20,6 @@ import {PokemonResponse} from '../../types/pokemon';
 import Left from 'react-native-vector-icons/MaterialIcons';
 import Right from 'react-native-vector-icons/MaterialIcons';
 import {Container, PaginateTitle, TitleNotFound} from './styles';
-import {Pokemon} from '../../types/pokemon';
 
 import NotFoundImage from '../../assets/notFound.gif';
 
@@ -50,7 +49,7 @@ function Pokedex() {
     return <PokemonCard image={imageUrl} pokemonId={pokemonId} name={name} />;
   };
 
-  if (pokemonQuery.isLoading) {
+  if (pokemonQuery.isLoading || pokemonQueryByName.isLoading) {
     return <Loading />;
   }
 
@@ -73,7 +72,7 @@ function Pokedex() {
 
   return (
     <>
-      <StatusBar color="#FFFFFF" />
+      <StatusBar color="#f0f2f5" />
       <Container>
         <Header
           title="Pokédex"

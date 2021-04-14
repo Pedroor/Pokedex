@@ -1,6 +1,6 @@
 import React from 'react';
 import {useQuery, QueryFunctionContext} from 'react-query';
-import {ApiResponse, Pokemon} from '../types/pokemon';
+import {Pokemon} from '../types/pokemon';
 import api from '../services/api';
 
 export async function fetchPokemonsByName(ctx: QueryFunctionContext<string[]>) {

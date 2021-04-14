@@ -1,5 +1,5 @@
-import React, {ReactNode, useEffect} from 'react';
-import {Image, View} from 'react-native';
+import React, {ReactNode} from 'react';
+import {Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {
   Container,
@@ -74,7 +74,7 @@ export function Header({
 
       <Subtitle>
         A Pokédex contem os status detalhados de cada criatura do universo
-        Pokémon
+        Pokémon.
       </Subtitle>
     </Container>
   );
