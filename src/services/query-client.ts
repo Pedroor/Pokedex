@@ -1,9 +1,3 @@
 import {QueryClient} from 'react-query';
 
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
+export const queryClient = new QueryClient();

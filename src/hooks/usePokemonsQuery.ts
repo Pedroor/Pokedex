@@ -5,7 +5,9 @@ import api, {apiPaginate} from '../services/api';
 
 export async function fetchPokemons(ctx: QueryFunctionContext<string[]>) {
   const [endpoint] = ctx.queryKey;
-  const {data} = await apiPaginate.get<ApiResponse>(`${endpoint}?limit=10`);
+  const {data} = await apiPaginate.get<ApiResponse>(
+    `${endpoint}/pokemon?limit=10`,
+  );
 
   return data;
 }
