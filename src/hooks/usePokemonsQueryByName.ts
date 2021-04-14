@@ -6,7 +6,7 @@ import api from '../services/api';
 export async function fetchPokemonsByName(ctx: QueryFunctionContext<string[]>) {
   const [name] = ctx.queryKey;
 
-  const {data} = await api.get<Pokemon>(`/${name}`);
+  const {data} = await api.get<Pokemon>(`/pokemon/${name}`);
 
   return data;
 }

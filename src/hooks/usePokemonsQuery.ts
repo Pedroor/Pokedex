@@ -13,7 +13,7 @@ export async function fetchPokemons(ctx: QueryFunctionContext<string[]>) {
 export async function fetchPokemonsById(ctx: QueryFunctionContext<string[]>) {
   const [id] = ctx.queryKey;
 
-  const {data} = await api.get<Pokemon>(`/${Number(id)}`);
+  const {data} = await api.get<Pokemon>(`/pokemon/${Number(id)}`);
 
   return data;
 }

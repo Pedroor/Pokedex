@@ -7,7 +7,10 @@ import {
   ListRenderItem,
   TouchableOpacity,
 } from 'react-native';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
 import {BASE_URL} from '../../constants/index';
+import {replacePokemonURL} from '../../utils/replaceStrings';
 import {usePokemonsQuery} from '../../hooks/usePokemonsQuery';
 import {usePokemonsQueryByName} from '../../hooks/usePokemonsQueryByName';
 import {useDebounce} from 'use-debounce';
@@ -22,8 +25,9 @@ import {Container, PaginateTitle, TitleNotFound} from './styles';
 import NotFoundImage from '../../assets/notFound.gif';
 
 function Pokedex() {
+  const navigation = useNavigation();
   const [pokemonName, setPokemonName] = useState('');
-  const [value] = useDebounce(pokemonName, 500);
+  const [value] = useDebounce(pokemonName.toLowerCase(), 500);
   const [endpoint, setEndpoint] = useState(BASE_URL);
   const pokemonQuery = usePokemonsQuery(endpoint);
   const pokemonQueryByName = usePokemonsQueryByName(value);
@@ -42,12 +46,14 @@ function Pokedex() {
 
   const renderPokemonCards: ListRenderItem<PokemonResponse> = ({item}) => {
     const {name, url} = item;
-    const pokemonId = url
-      .replace('https://pokeapi.co/api/v2/pokemon/', '')
-      .replace('/', '');
-    const imageUrl = `https://pokeres.bastionbot.org/images/pokemon/${pokemonId}.png`;
+    const {pokemonId, imageUrl} = replacePokemonURL(url);
 
-    return <PokemonCard image={imageUrl} pokemonId={pokemonId} name={name} />;
+    return (
+      <TouchableWithoutFeedback
+        onPress={() => navigation.navigate('Details', {id: pokemonId})}>
+        <PokemonCard image={imageUrl} pokemonId={pokemonId} name={name} />
+      </TouchableWithoutFeedback>
+    );
   };
 
   if (pokemonQuery.isLoading) {
