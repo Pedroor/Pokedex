@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="Marvel" src="https://logosmarcas.net/wp-content/uploads/2020/05/Pokemon-Logo.png" width="250px" />
+  <img alt="Pokemon" src="https://logosmarcas.net/wp-content/uploads/2020/05/Pokemon-Logo.png" width="250px" />
 </h1>
 
 
